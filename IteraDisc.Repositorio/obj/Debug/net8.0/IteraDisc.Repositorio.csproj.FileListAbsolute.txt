@@ -32,3 +32,4 @@ C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Repositorio\obj\Debug\net8.0\IteraDisc.Repositorio.pdb
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Repositorio\obj\Debug\net8.0\IteraDisc.Repositorio.genruntimeconfig.cache
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Repositorio\obj\Debug\net8.0\ref\IteraDisc.Repositorio.dll
+C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Repositorio\obj\Debug\net8.0\IteraDisc.Repositorio.sourcelink.json

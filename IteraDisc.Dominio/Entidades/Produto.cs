@@ -12,6 +12,21 @@ namespace IteraDisc.Dominio.Entidades
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public int EmEstoque { get; set; }
-        public List<GenerosMusicais> GenerosMusicais { get; set; }
+        public bool Ativo { get; set; }
+
+        public Produto()
+        {
+            Ativo = true;
+        }
+
+        public void Deletar()
+        {
+            Ativo = false;
+        }
+
+        public void Restaurar()
+        {
+            Ativo = true;
+        }
     }
 }

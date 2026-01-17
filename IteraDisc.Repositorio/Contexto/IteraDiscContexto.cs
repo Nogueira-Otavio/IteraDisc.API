@@ -14,6 +14,7 @@ namespace IteraDisc.Repositorio.Contexto
         private readonly DbContextOptions _options;
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         public IteraDiscContexto()
         {
@@ -29,7 +30,7 @@ namespace IteraDisc.Repositorio.Contexto
         {
             
                 optionsBuilder.UseSqlServer(
-                    "Server=localhost\\SQLEXPRESS01;Database=IteraDisc;Trusted_Connection=True;TrustServerCertificate=True"
+                    "Server=localhost\\SQLEXPRESS;Database=IteraDisc;Trusted_Connection=True;TrustServerCertificate=True"
                 );
         }
 
@@ -37,6 +38,7 @@ namespace IteraDisc.Repositorio.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsusarioConfiguracoes());
+            modelBuilder.ApplyConfiguration(new ProdutoConfiguracoes());
         }
     }
 }
