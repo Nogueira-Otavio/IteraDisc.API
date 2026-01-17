@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\IteraDisc.Repositorio\IteraDisc.Repositorio.csproj" />
+    <ProjectReference Include="..\IteraDisc.Dominio\IteraDisc.Dominio.csproj" />
+    <ProjectReference Include="..\IteraDisc.Servicos\IteraDisc.Servicos.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+</Project>
