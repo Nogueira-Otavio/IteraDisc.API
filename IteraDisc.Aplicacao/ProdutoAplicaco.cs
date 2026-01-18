@@ -31,6 +31,8 @@ namespace IteraDisc.Aplicacao
             produtoDominio.Descricao = produtoDTO.Descricao;
             produtoDominio.Preco = produtoDTO.Preco;
             produtoDominio.EmEstoque = produtoDTO.EmEstoque;
+
+            await _produtoRepositorio.Atualizar(produtoDominio);
         }
 
         public async Task<int> Criar(Produto produtoDTO)
@@ -40,7 +42,7 @@ namespace IteraDisc.Aplicacao
 
             ValidarInformacoesProduto(produtoDTO);
 
-            if (produtoDTO.EmEstoque >= 0)
+            if (produtoDTO.EmEstoque <= 0)
                 throw new Exception("Informe uma quantidade válida de estoque!");
 
             return await _produtoRepositorio.Salvar(produtoDTO);
@@ -80,7 +82,7 @@ namespace IteraDisc.Aplicacao
             if(produtoDominio == null)
                 throw new Exception("Produto não encontrado!");
 
-            produtoDominio.Deletar();
+            produtoDominio.Restaurar();
 
             await _produtoRepositorio.Atualizar(produtoDominio);
         }
@@ -94,10 +96,10 @@ namespace IteraDisc.Aplicacao
             if (string.IsNullOrEmpty(produto.Descricao))
                 throw new Exception("Descrição do produto não pode ser vazia!");
 
-            if (produto.Preco >= 0.00m)
-                throw new Exception("Preço tem que ser mair que zero!");
+            if (produto.Preco <= 0.00m)
+                throw new Exception("Preço tem que ser maior que zero!");
 
-            if (produto.EmEstoque > 0)
+            if (produto.EmEstoque < 0)
                 throw new Exception("Insira uma quantidade válida para o estoque!");
         }
         #endregion
