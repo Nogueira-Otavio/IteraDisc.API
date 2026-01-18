@@ -11,10 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IUsuarioAplicacao, UsuarioAplicacao>();
 builder.Services.AddScoped<IProdutoAplicao, ProdutoAplicaco>();
+builder.Services.AddScoped<IItemVendaAplicacao, ItemVendaAplicacao>();
 
 // Add database interfaces
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+builder.Services.AddScoped<IITemVendaRepositorio, ItemVendaRepositorio>();
 
 // Add services
 

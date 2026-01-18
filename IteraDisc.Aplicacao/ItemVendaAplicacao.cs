@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using IteraDisc.Aplicacao.Interfaces;
+using IteraDisc.Dominio.Entidades;
+using IteraDisc.Repositorio.Interfaces;
+
+namespace IteraDisc.Aplicacao
+{
+    public class ItemVendaAplicacao : IItemVendaAplicacao
+    {
+        readonly IITemVendaRepositorio _iTemVendaRepositorio;
+        readonly IProdutoRepositorio _produtoRepositorio;
+
+        public ItemVendaAplicacao(IITemVendaRepositorio iTemVendaRepositorio, IProdutoRepositorio produtoRepositorio)
+        {
+            _iTemVendaRepositorio = iTemVendaRepositorio;
+            _produtoRepositorio = produtoRepositorio;
+        }
+
+        public async Task Atualizar(ItemVenda itemVendaDTO)
+        {
+            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVendaDTO.ItemVendaId);
+            var produtoDominio = await _produtoRepositorio.Obter(itemVendaDTO.ProdutoId, true);
+
+            if(itemVendaDominio == null)
+                throw new Exception("ItemVenda não encontrado!");
+
+            itemVendaDominio.Quantidade = itemVendaDTO.Quantidade;
+
+            if(itemVendaDominio.Quantidade >= 0)
+                throw new Exception("Tem que haver no mínimo uma cópia do produto!");
+
+            itemVendaDominio.ProdutoId = itemVendaDTO.ProdutoId;
+            itemVendaDominio.Quantidade = itemVendaDTO.Quantidade;
+            itemVendaDominio.ValorItemVenda = itemVendaDTO.Quantidade * produtoDominio.Preco;
+
+            await _iTemVendaRepositorio.Atualizar(itemVendaDominio);
+        }
+
+        public async Task<int> Criar(ItemVenda itemVendaDTO)
+        {
+            if (itemVendaDTO == null)
+                throw new Exception("ItemVenda não pode ser vazio!");
+
+            var produtoDominio = await _produtoRepositorio.Obter(itemVendaDTO.ProdutoId, true);
+
+            if(produtoDominio == null)
+                throw new Exception("Produto não encontrado!");
+
+            if(itemVendaDTO.Quantidade == 0)
+                throw new Exception("Não há estoque deste item!");
+
+            if(itemVendaDTO.Quantidade > produtoDominio.EmEstoque)
+                throw new Exception("Você está tentando comprar mais itens do que estão disponíveis no estoque!");
+            
+            itemVendaDTO.ValorItemVenda = produtoDominio.Preco + itemVendaDTO.Quantidade;
+
+            return await _iTemVendaRepositorio.Criar(itemVendaDTO);
+        }
+
+        public async Task<IEnumerable<ItemVenda>> Listar()
+        {
+            return await _iTemVendaRepositorio.Listar();
+        }
+
+        public async Task<ItemVenda> Obter(int itemVendaId)
+        {
+            var itemVendaDominio = _iTemVendaRepositorio.Obter(itemVendaId);
+
+            if(itemVendaDominio == null)
+                throw new Exception("ItemVenda não encontrado!");
+
+            return await itemVendaDominio;
+        }
+    }
+}
