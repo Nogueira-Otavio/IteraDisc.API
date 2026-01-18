@@ -17,6 +17,8 @@ namespace IteraDisc.Repositorio.Configuracoes
             builder.Property(nameof(Produto.ProdutoId)).HasColumnName("ProdutoId");
             builder.Property(nameof(Produto.Nome)).HasColumnName("Nome").IsRequired(true);
             builder.Property(nameof(Produto.Descricao)).HasColumnName("Descricao").IsRequired(true);
+            builder.Property(nameof(Produto.Preco)).HasColumnName("Preco").IsRequired(true);
+            builder.Property(nameof(Produto.EmEstoque)).HasColumnName("EmEstoque").IsRequired(true);
             builder.Property(nameof(Produto.Ativo)).HasColumnName("Ativo").IsRequired(true);
         }
     }

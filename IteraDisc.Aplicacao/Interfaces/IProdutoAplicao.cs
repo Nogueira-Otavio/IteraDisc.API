@@ -13,7 +13,6 @@ namespace IteraDisc.Aplicacao.Interfaces
         Task Deletar(int produtoId);
         Task Restaurar(int produtoId);
         Task<IEnumerable<Produto>> Listar(bool ativo);
-        Task<Produto> Obter(int usuarioId);
-        Task GerenciarEstoque(Produto produtoDTO);
+        Task<Produto> Obter(int produtoId);
     }
 }
