@@ -15,6 +15,7 @@ namespace IteraDisc.Repositorio.Contexto
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<ItemVenda> ItemVendas { get; set; }
 
         public IteraDiscContexto()
         {
@@ -39,6 +40,7 @@ namespace IteraDisc.Repositorio.Contexto
         {
             modelBuilder.ApplyConfiguration(new UsusarioConfiguracoes());
             modelBuilder.ApplyConfiguration(new ProdutoConfiguracoes());
+            modelBuilder.ApplyConfiguration(new ItemVendaConfiguracoes());
         }
     }
 }

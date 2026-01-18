@@ -12,7 +12,7 @@ namespace IteraDisc.Repositorio.Configuracoes
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.ToTable("Produto").HasAlternateKey(p => p.ProdutoId);
+            builder.ToTable("Produto").HasKey(p => p.ProdutoId);
 
             builder.Property(nameof(Produto.ProdutoId)).HasColumnName("ProdutoId");
             builder.Property(nameof(Produto.Nome)).HasColumnName("Nome").IsRequired(true);
