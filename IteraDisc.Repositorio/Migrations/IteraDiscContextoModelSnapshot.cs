@@ -21,6 +21,42 @@ namespace IteraDisc.Repositorio.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IteraDisc.Dominio.Entidades.Produto", b =>
+                {
+                    b.Property<int>("ProdutoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ProdutoId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProdutoId"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("Ativo");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Descricao");
+
+                    b.Property<int>("EmEstoque")
+                        .HasColumnType("int")
+                        .HasColumnName("EmEstoque");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Nome");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Preco");
+
+                    b.HasKey("ProdutoId");
+
+                    b.ToTable("Produto", (string)null);
+                });
+
             modelBuilder.Entity("IteraDisc.Dominio.Entidades.Usuario", b =>
                 {
                     b.Property<int>("UsuarioId")
@@ -35,14 +71,17 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnName("Ativo");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
 
                     b.Property<string>("Senha")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Senha");
 

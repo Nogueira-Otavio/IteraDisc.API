@@ -157,3 +157,4 @@ C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Api\obj\Debug\net8.0\refint\
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Api\obj\Debug\net8.0\IteraDisc.Api.pdb
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Api\obj\Debug\net8.0\IteraDisc.Api.genruntimeconfig.cache
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Api\obj\Debug\net8.0\ref\IteraDisc.Api.dll
+C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Api\obj\Debug\net8.0\IteraDisc.Api.sourcelink.json

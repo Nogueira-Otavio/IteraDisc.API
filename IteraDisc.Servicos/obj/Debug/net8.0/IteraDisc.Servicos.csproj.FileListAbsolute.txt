@@ -24,3 +24,4 @@ C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Servicos\obj\Debug\net8.0\It
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Servicos\obj\Debug\net8.0\refint\IteraDisc.Servicos.dll
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Servicos\obj\Debug\net8.0\IteraDisc.Servicos.pdb
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Servicos\obj\Debug\net8.0\ref\IteraDisc.Servicos.dll
+C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Servicos\obj\Debug\net8.0\IteraDisc.Servicos.sourcelink.json

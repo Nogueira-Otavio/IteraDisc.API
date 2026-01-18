@@ -20,3 +20,4 @@ C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Dominio\obj\Debug\net8.0\refint\IteraDisc.Dominio.dll
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Dominio\obj\Debug\net8.0\IteraDisc.Dominio.pdb
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Dominio\obj\Debug\net8.0\ref\IteraDisc.Dominio.dll
+C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Dominio\obj\Debug\net8.0\IteraDisc.Dominio.sourcelink.json

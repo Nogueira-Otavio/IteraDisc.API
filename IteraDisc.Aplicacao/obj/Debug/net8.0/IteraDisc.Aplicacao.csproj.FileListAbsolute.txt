@@ -34,3 +34,4 @@ C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc
 C:\Users\Tarde\Desktop\Tavin gameplays\Projeto de Conclusão\IteraDisc\IteraDisc.Aplicacao\obj\Debug\net8.0\ref\IteraDisc.Aplicacao.dll
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Aplicacao\bin\Debug\net8.0\IteraDisc.Servicos.dll
 C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Aplicacao\bin\Debug\net8.0\IteraDisc.Servicos.pdb
+C:\Users\otavi\OneDrive\Desktop\IteraDisc\IteraDisc.Aplicacao\obj\Debug\net8.0\IteraDisc.Aplicacao.sourcelink.json

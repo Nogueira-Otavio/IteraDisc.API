@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IteraDisc.Servicos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89292d2e36c4e3e1c4af1dc3a03e63c690f58293")]
 [assembly: System.Reflection.AssemblyProductAttribute("IteraDisc.Servicos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IteraDisc.Servicos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
