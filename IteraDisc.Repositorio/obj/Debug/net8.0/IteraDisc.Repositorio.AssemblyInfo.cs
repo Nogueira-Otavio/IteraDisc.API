@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IteraDisc.Repositorio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3916f801a92017de66127c7a31fa71c7460df08")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7625bd2afaecd98b748cff5d7398f7f708dbc257")]
 [assembly: System.Reflection.AssemblyProductAttribute("IteraDisc.Repositorio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IteraDisc.Repositorio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

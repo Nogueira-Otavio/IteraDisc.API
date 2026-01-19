@@ -16,8 +16,15 @@ namespace IteraDisc.Repositorio.Configuracoes
 
             builder.Property(nameof(ItemVenda.ItemVendaId)).HasColumnName("ItemVendaId");
             builder.Property(nameof(ItemVenda.ProdutoId)).HasColumnName("ProdutoId").IsRequired(true);
+            builder.Property(nameof(ItemVenda.VendaId)).HasColumnName("VendaId");
             builder.Property(nameof(ItemVenda.Quantidade)).HasColumnName("Quantidade").IsRequired(true);
-            builder.Property(nameof(ItemVenda.ValorItemVenda)).HasColumnName("ValorItemVenda").IsRequired(true);
+            builder.Property(nameof(ItemVenda.ValorItemVenda)).HasColumnName("ValorItemVenda").HasPrecision(18,2).IsRequired(true);
+            builder.Property(nameof(ItemVenda.Vendido)).HasColumnName("Vendido").IsRequired(true);
+
+            builder
+                    .HasOne(itemVenda => itemVenda.Venda)
+                    .WithMany(venda => venda.Itens)
+                    .HasForeignKey(itemVenda => itemVenda.VendaId);
         }
     }
 }
