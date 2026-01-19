@@ -31,7 +31,7 @@ namespace IteraDisc.Repositorio.Contexto
         {
             
                 optionsBuilder.UseSqlServer(
-                    "Server=localhost\\SQLEXPRESS;Database=IteraDisc;Trusted_Connection=True;TrustServerCertificate=True"
+                    "Server=localhost\\SQLEXPRESS01;Database=IteraDisc;Trusted_Connection=True;TrustServerCertificate=True"
                 );
         }
 

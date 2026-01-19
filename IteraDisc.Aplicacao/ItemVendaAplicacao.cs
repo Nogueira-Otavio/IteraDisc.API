@@ -19,22 +19,25 @@ namespace IteraDisc.Aplicacao
             _produtoRepositorio = produtoRepositorio;
         }
 
-        public async Task Atualizar(ItemVenda itemVendaDTO)
+        public async Task Atualizar(ItemVenda itemVenda)
         {
-            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVendaDTO.ItemVendaId);
-            var produtoDominio = await _produtoRepositorio.Obter(itemVendaDTO.ProdutoId, true);
+            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVenda.ItemVendaId);
+            var produtoDominio = await _produtoRepositorio.Obter(itemVenda.ProdutoId, true);
 
             if(itemVendaDominio == null)
                 throw new Exception("ItemVenda não encontrado!");
+            
+            if(produtoDominio == null)
+                throw new Exception("Produto não encontrado!");
 
-            itemVendaDominio.Quantidade = itemVendaDTO.Quantidade;
+            itemVendaDominio.Quantidade = itemVenda.Quantidade;
 
-            if(itemVendaDominio.Quantidade >= 0)
+            if(itemVendaDominio.Quantidade <= 0)
                 throw new Exception("Tem que haver no mínimo uma cópia do produto!");
 
-            itemVendaDominio.ProdutoId = itemVendaDTO.ProdutoId;
-            itemVendaDominio.Quantidade = itemVendaDTO.Quantidade;
-            itemVendaDominio.ValorItemVenda = itemVendaDTO.Quantidade * produtoDominio.Preco;
+            itemVendaDominio.ProdutoId = itemVenda.ProdutoId;
+            itemVendaDominio.Quantidade = itemVenda.Quantidade;
+            itemVendaDominio.ValorItemVenda = itemVenda.Quantidade * produtoDominio.Preco;
 
             await _iTemVendaRepositorio.Atualizar(itemVendaDominio);
         }
@@ -49,7 +52,7 @@ namespace IteraDisc.Aplicacao
             if(produtoDominio == null)
                 throw new Exception("Produto não encontrado!");
 
-            if(itemVendaDTO.Quantidade == 0)
+            if(itemVendaDTO.Quantidade <= 0)
                 throw new Exception("Não há estoque deste item!");
 
             if(itemVendaDTO.Quantidade > produtoDominio.EmEstoque)

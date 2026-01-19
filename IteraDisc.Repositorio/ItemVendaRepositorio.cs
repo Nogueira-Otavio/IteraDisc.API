@@ -15,9 +15,10 @@ namespace IteraDisc.Repositorio
         {
         }
 
-        public Task Atualizar(ItemVenda itemVenda)
+        public async Task Atualizar(ItemVenda itemVenda)
         {
-            throw new NotImplementedException();
+            _contexto.ItemVendas.Update(itemVenda);
+            await _contexto.SaveChangesAsync();
         }
 
         public async Task<int> Criar(ItemVenda itemVenda)
@@ -36,8 +37,8 @@ namespace IteraDisc.Repositorio
         public async Task<ItemVenda> Obter(int itemVendaId)
         {
             return await _contexto.ItemVendas
-                    .Where(iv => iv.ItemVendaId == itemVendaId)
-                    .FirstOrDefaultAsync();
+                        .Where(itemVenda => itemVenda.ItemVendaId == itemVendaId)
+                        .FirstOrDefaultAsync();
         }
     }
 }

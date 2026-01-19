@@ -53,6 +53,7 @@ namespace IteraDisc.Api.Controllers
             {
                 var itemVendaDominio = new ItemVenda()
                 {
+                    ItemVendaId = itemVendaAtualizar.ItemVendaId,
                     ProdutoId = itemVendaAtualizar.ProdutoId,
                     Quantidade = itemVendaAtualizar.Quantidade,
                     ValorItemVenda = itemVendaAtualizar.ValorItemVenda

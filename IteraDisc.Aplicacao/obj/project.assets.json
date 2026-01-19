@@ -2792,38 +2792,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\otavi\\.nuget\\packages\\": {}
+    "C:\\Users\\Tarde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Aplicacao\\IteraDisc.Aplicacao.csproj",
+      "projectUniqueName": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Aplicacao\\IteraDisc.Aplicacao.csproj",
       "projectName": "IteraDisc.Aplicacao",
-      "projectPath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Aplicacao\\IteraDisc.Aplicacao.csproj",
-      "packagesPath": "C:\\Users\\otavi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Aplicacao\\obj\\",
+      "projectPath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Aplicacao\\IteraDisc.Aplicacao.csproj",
+      "packagesPath": "C:\\Users\\Tarde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Aplicacao\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\otavi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Tarde\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Dominio\\IteraDisc.Dominio.csproj": {
-              "projectPath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Dominio\\IteraDisc.Dominio.csproj"
+            "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Dominio\\IteraDisc.Dominio.csproj": {
+              "projectPath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Dominio\\IteraDisc.Dominio.csproj"
             },
-            "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Repositorio\\IteraDisc.Repositorio.csproj": {
-              "projectPath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Repositorio\\IteraDisc.Repositorio.csproj"
+            "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Repositorio\\IteraDisc.Repositorio.csproj": {
+              "projectPath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Repositorio\\IteraDisc.Repositorio.csproj"
             },
-            "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj": {
-              "projectPath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj"
+            "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj": {
+              "projectPath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj"
             }
           }
         }
@@ -2858,7 +2860,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
