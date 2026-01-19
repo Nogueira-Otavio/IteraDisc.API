@@ -3,6 +3,7 @@ using IteraDisc.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IteraDisc.Repositorio.Migrations
 {
     [DbContext(typeof(IteraDiscContexto))]
-    partial class IteraDiscContextoModelSnapshot : ModelSnapshot
+    [Migration("20260118235744_CriacaoItemVenda")]
+    partial class CriacaoItemVenda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

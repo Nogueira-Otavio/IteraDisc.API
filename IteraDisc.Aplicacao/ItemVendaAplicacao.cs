@@ -55,7 +55,7 @@ namespace IteraDisc.Aplicacao
             if(itemVendaDTO.Quantidade > produtoDominio.EmEstoque)
                 throw new Exception("Você está tentando comprar mais itens do que estão disponíveis no estoque!");
             
-            itemVendaDTO.ValorItemVenda = produtoDominio.Preco + itemVendaDTO.Quantidade;
+            itemVendaDTO.ValorItemVenda = produtoDominio.Preco * itemVendaDTO.Quantidade;
 
             return await _iTemVendaRepositorio.Criar(itemVendaDTO);
         }
