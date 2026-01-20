@@ -19,6 +19,8 @@ namespace IteraDisc.Dominio.Entidades
         public ItemVenda()
         {
             Vendido = false;
+            VendaId = 0;
+            Venda = null;
         }
     }
 }

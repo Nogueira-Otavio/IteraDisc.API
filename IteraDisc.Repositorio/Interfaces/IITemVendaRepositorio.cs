@@ -10,7 +10,7 @@ namespace IteraDisc.Repositorio.Interfaces
     {
         Task<int> Criar(ItemVenda itemVenda);
         Task Atualizar(ItemVenda itemVenda);
-        Task<ItemVenda> Obter(int itemVendaId);
-        Task<IEnumerable<ItemVenda>> Listar();
+        Task<ItemVenda> Obter(int itemVendaId, bool vendido);
+        Task<IEnumerable<ItemVenda>> Listar(bool vendido);
     }
 }

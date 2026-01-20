@@ -21,7 +21,7 @@ namespace IteraDisc.Aplicacao
 
         public async Task Atualizar(ItemVenda itemVenda)
         {
-            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVenda.ItemVendaId);
+            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVenda.ItemVendaId, false);
             var produtoDominio = await _produtoRepositorio.Obter(itemVenda.ProdutoId, true);
 
             if(itemVendaDominio == null)
@@ -53,7 +53,7 @@ namespace IteraDisc.Aplicacao
                 throw new Exception("Produto não encontrado!");
 
             if(itemVendaDTO.Quantidade <= 0)
-                throw new Exception("Não há estoque deste item!");
+                throw new Exception("Informe uma quantidade válida!");
 
             if(itemVendaDTO.Quantidade > produtoDominio.EmEstoque)
                 throw new Exception("Você está tentando comprar mais itens do que estão disponíveis no estoque!");
@@ -63,14 +63,14 @@ namespace IteraDisc.Aplicacao
             return await _iTemVendaRepositorio.Criar(itemVendaDTO);
         }
 
-        public async Task<IEnumerable<ItemVenda>> Listar()
+        public async Task<IEnumerable<ItemVenda>> Listar(bool vendido)
         {
-            return await _iTemVendaRepositorio.Listar();
+            return await _iTemVendaRepositorio.Listar(vendido);
         }
 
-        public async Task<ItemVenda> Obter(int itemVendaId)
+        public async Task<ItemVenda> Obter(int itemVendaId, bool vendido)
         {
-            var itemVendaDominio = _iTemVendaRepositorio.Obter(itemVendaId);
+            var itemVendaDominio = _iTemVendaRepositorio.Obter(itemVendaId, vendido);
 
             if(itemVendaDominio == null)
                 throw new Exception("ItemVenda não encontrado!");

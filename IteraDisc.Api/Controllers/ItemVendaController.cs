@@ -16,10 +16,12 @@ namespace IteraDisc.Api.Controllers
     public class ItemVendaController : Controller
     {
         private readonly IItemVendaAplicacao _itemVendaAplicacao;
+        private readonly IVendaAplicacao _vendaAplicacao;
 
-        public ItemVendaController(IItemVendaAplicacao itemVendaAplicacao)
+        public ItemVendaController(IItemVendaAplicacao itemVendaAplicacao, IVendaAplicacao vendaAplicacao)
         {
             _itemVendaAplicacao = itemVendaAplicacao;
+            _vendaAplicacao = vendaAplicacao;
         }
 
         [HttpPost]
@@ -56,7 +58,10 @@ namespace IteraDisc.Api.Controllers
                     ItemVendaId = itemVendaAtualizar.ItemVendaId,
                     ProdutoId = itemVendaAtualizar.ProdutoId,
                     Quantidade = itemVendaAtualizar.Quantidade,
-                    ValorItemVenda = itemVendaAtualizar.ValorItemVenda
+                    ValorItemVenda = itemVendaAtualizar.ValorItemVenda,
+                    Vendido = itemVendaAtualizar.Vendido,
+                    VendaId = itemVendaAtualizar.VendaId,
+                    Venda = await _vendaAplicacao.Obter(itemVendaAtualizar.VendaId)
                 };
 
                await _itemVendaAplicacao.Atualizar(itemVendaDominio);
@@ -72,11 +77,11 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Obter/{itemVendaId}")]
-        public async Task<ActionResult> Obter([FromRoute] int itemVendaId)
+        public async Task<ActionResult> Obter([FromRoute] int itemVendaId, [FromQuery] bool vendido)
         {
             try
             {
-                var itemVendaDominio = await _itemVendaAplicacao.Obter(itemVendaId);
+                var itemVendaDominio = await _itemVendaAplicacao.Obter(itemVendaId, vendido);
 
                 var itemVenda = new ItemVenda()
                 {
@@ -96,11 +101,11 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        public async Task<ActionResult> List([FromQuery] ItemVenda itemVenda)
+        public async Task<ActionResult> List([FromQuery] ItemVenda itemVenda, [FromQuery] bool vendido)
         {
             try
             {
-                var itemVendaDominio = await _itemVendaAplicacao.Listar();
+                var itemVendaDominio = await _itemVendaAplicacao.Listar(vendido);
 
                 var itensVenda = itemVendaDominio.Select(iv => new ItemVendaResponse()
                 {

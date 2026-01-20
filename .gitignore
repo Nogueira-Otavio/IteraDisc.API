@@ -9,3 +9,6 @@ IteraDisc.Dominio/obj/Debug/net8.0/IteraDisc.Dominio.AssemblyInfoInputs.cache
 IteraDisc.Repositorio/obj/Debug/net8.0/IteraDisc.Repositorio.AssemblyInfo.cs
 IteraDisc.Repositorio/obj/Debug/net8.0/IteraDisc.Repositorio.AssemblyInfoInputs.cache
 IteraDisc.Repositorio/obj/Debug/net8.0/IteraDisc.Repositorio.csproj.AssemblyReference.cache
+
+**/bin/
+**/obj/
