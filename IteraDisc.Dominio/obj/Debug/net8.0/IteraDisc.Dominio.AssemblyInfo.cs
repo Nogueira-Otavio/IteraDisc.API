@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IteraDisc.Dominio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7625bd2afaecd98b748cff5d7398f7f708dbc257")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c38a330a433dbeefe1a68dd990573a794153d20")]
 [assembly: System.Reflection.AssemblyProductAttribute("IteraDisc.Dominio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IteraDisc.Dominio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
