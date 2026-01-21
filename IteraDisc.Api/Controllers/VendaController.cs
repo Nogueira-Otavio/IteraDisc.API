@@ -36,10 +36,9 @@ namespace IteraDisc.Api.Controllers
                 var vendaDominio = new Venda()
                 {
                     UsuarioId = vendaCriar.UsuarioId,
-                    Usuario = vendaCriar.Usuario,
                     DataVenda = vendaCriar.DataVenda,
                     ValorTotalVenda = vendaCriar.ValorTotalVenda,
-                    Itens = vendaCriar.Itens
+                    ItensId = vendaCriar.ItensId
                 };
 
                 var vendaID = await _vendaAplicacao.Criar(vendaDominio);

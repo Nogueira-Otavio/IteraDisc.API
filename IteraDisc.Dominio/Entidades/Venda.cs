@@ -13,6 +13,7 @@ namespace IteraDisc.Dominio.Entidades
         public DateTime DataVenda { get; set; }
         public decimal ValorTotalVenda { get; set; }
 
+        public List<int> ItensId { get; set; }
         public List<ItemVenda> Itens { get; set; }
     }
 }
