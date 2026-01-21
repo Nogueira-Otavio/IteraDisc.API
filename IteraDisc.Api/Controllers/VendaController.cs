@@ -79,7 +79,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        public async Task<ActionResult> Listar([FromQuery] Venda venda)
+        public async Task<ActionResult> Listar([FromRoute] Venda venda)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace IteraDisc.Api.Controllers
         }
 
         [HttpGet]
-        [Route("Listar/{usuarioId}")]
+        [Route("HistoricoCliente")]
         public async Task<ActionResult> HistoricoCliente([FromQuery] int usuarioId)
         {
             try

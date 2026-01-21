@@ -12,11 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUsuarioAplicacao, UsuarioAplicacao>();
 builder.Services.AddScoped<IProdutoAplicao, ProdutoAplicaco>();
 builder.Services.AddScoped<IItemVendaAplicacao, ItemVendaAplicacao>();
+builder.Services.AddScoped<IVendaAplicacao, VendaAplicacao>();
 
 // Add database interfaces
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 builder.Services.AddScoped<IITemVendaRepositorio, ItemVendaRepositorio>();
+builder.Services.AddScoped<IVendaRepositorio, VendaRepositorio>();
 
 // Add services
 

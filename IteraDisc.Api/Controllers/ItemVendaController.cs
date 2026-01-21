@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
+    [ApiController]
     [Route("[controller]")]
     public class ItemVendaController : Controller
     {
@@ -101,7 +102,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        public async Task<ActionResult> List([FromQuery] ItemVenda itemVenda, [FromQuery] bool vendido)
+        public async Task<ActionResult> List([FromQuery] bool vendido)
         {
             try
             {

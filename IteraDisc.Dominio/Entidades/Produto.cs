@@ -13,6 +13,7 @@ namespace IteraDisc.Dominio.Entidades
         public decimal Preco { get; set; }
         public int EmEstoque { get; set; }
         public bool Ativo { get; set; }
+        public List<ItemVenda> Vendas { get; set; }
 
         public Produto()
         {
