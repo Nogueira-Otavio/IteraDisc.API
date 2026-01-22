@@ -143,6 +143,9 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataVenda");
 
+                    b.Property<string>("ItensId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int")
                         .HasColumnName("UsuarioId");

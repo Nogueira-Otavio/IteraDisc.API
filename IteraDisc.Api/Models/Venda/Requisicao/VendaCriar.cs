@@ -11,6 +11,6 @@ namespace IteraDisc.Api.Models.Venda.Requisicao
         public int UsuarioId { get; set; }
         public DateTime DataVenda { get; set; }
         public decimal ValorTotalVenda { get; set; }
-        public List<int> ItensId { get; set; }
+        public List<int> Itens { get; set; }
     }
 }

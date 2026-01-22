@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using IteraDisc.Api.Models.ItemVenda.Resposta;
 using IteraDisc.Api.Models.Venda.Requisicao;
 using IteraDisc.Api.Models.Venda.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
@@ -38,7 +39,7 @@ namespace IteraDisc.Api.Controllers
                     UsuarioId = vendaCriar.UsuarioId,
                     DataVenda = vendaCriar.DataVenda,
                     ValorTotalVenda = vendaCriar.ValorTotalVenda,
-                    ItensId = vendaCriar.ItensId
+                    ItensId = new List<int>(vendaCriar.Itens)
                 };
 
                 var vendaID = await _vendaAplicacao.Criar(vendaDominio);
@@ -90,7 +91,11 @@ namespace IteraDisc.Api.Controllers
                     UsuarioId = v.UsuarioId,
                     DataVenda = v.DataVenda,
                     ValorTotalVenda = v.ValorTotalVenda,
-                    Itens = v.Itens
+                    Itens = v.Itens.Select(i => new ItemVenda()
+                    {
+                        ItemVendaId = i.ItemVendaId,
+                        ProdutoId = i.ProdutoId                    
+                    }).ToList()
                 }).ToList();
 
                 return Ok(vendas);
@@ -100,6 +105,7 @@ namespace IteraDisc.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpGet]
         [Route("HistoricoCliente")]

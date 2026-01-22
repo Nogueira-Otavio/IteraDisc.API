@@ -13,54 +13,57 @@ namespace IteraDisc.Aplicacao
         readonly IVendaRepositorio _vendaRepositorio;
         readonly IITemVendaRepositorio _itemVendaRepositorio;
         readonly IUsuarioRepositorio _usuarioRepositorio;
+        readonly IProdutoRepositorio _produtoRepositorio;
 
-        public VendaAplicacao(IVendaRepositorio vendaRepositorio,IITemVendaRepositorio itemVendaRepositorio, IUsuarioRepositorio usuarioRepositorio)
+        public VendaAplicacao(IVendaRepositorio vendaRepositorio, IITemVendaRepositorio itemVendaRepositorio, IUsuarioRepositorio usuarioRepositorio, IProdutoRepositorio produtoRepositorio)
         {
             _vendaRepositorio = vendaRepositorio;
             _itemVendaRepositorio = itemVendaRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _produtoRepositorio = produtoRepositorio;
         }
 
         public async Task<int> Criar(Venda vendaDTO)
         {
-            var itemVendaDominio = await _itemVendaRepositorio.Listar(false);
-            var usarioDominio = await _usuarioRepositorio.Obter(vendaDTO.UsuarioId, true);
-            if(vendaDTO == null)
+            if (vendaDTO == null)
                 throw new Exception("Venda não pode ser vazia!");
-            
-            int itensIguais = 0;
-            foreach (var item in itemVendaDominio)
-            {
-                foreach (int itemVenda in vendaDTO.ItensId)
-                {
-                    if( item.ItemVendaId == itemVenda)
-                    {
-                        var itemVendaId = await _itemVendaRepositorio.Obter(itemVenda, false);
-                        itemVendaId.Vendido = true;
-                        await _itemVendaRepositorio.Atualizar(itemVendaId);
-                        itensIguais = itensIguais++;
-                        vendaDTO.Itens.Add( new ItemVenda()
-                        {
-                            ItemVendaId = itemVendaId.ItemVendaId,
-                            ProdutoId = itemVendaId.ProdutoId,
-                            Produto = itemVendaId.Produto,
-                            Quantidade = itemVendaId.Quantidade,
-                            ValorItemVenda = itemVendaId.ValorItemVenda,
-                            Vendido = itemVendaId.Vendido,
-                        });
-                    }
-                }
-            }
-            if(itensIguais < vendaDTO.Itens.Count)
-                throw new Exception("Você passou itens não disponíveis para venda");
 
-            if(usarioDominio == null)
+            var usuarioDominio = await _usuarioRepositorio.Obter(vendaDTO.UsuarioId, true);
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
-            
-            vendaDTO.Usuario = usarioDominio;
+
+            vendaDTO.Usuario = usuarioDominio;
+            vendaDTO.Itens = new List<ItemVenda>();
+
+            decimal valorTotal = 0;
+
+            foreach (int itemVendaId in vendaDTO.ItensId)
+            {
+                // Busca o itemVenda que ainda não foi vendido
+                var itemVendaDominio = await _itemVendaRepositorio.Obter(itemVendaId, false);
+
+                if (itemVendaDominio == null)
+                    throw new Exception($"O item de venda {itemVendaId} não existe ou já foi vendido.");
+
+                // Marca como vendido
+                itemVendaDominio.Vendido = true;
+                itemVendaDominio.VendaId = vendaDTO.VendaId;
+
+                await _itemVendaRepositorio.Atualizar(itemVendaDominio);
+
+                // Adiciona na lista da venda
+                vendaDTO.Itens.Add(itemVendaDominio);
+
+                // Soma no total da venda
+                valorTotal += itemVendaDominio.ValorItemVenda;
+            }
+
+            vendaDTO.ValorTotalVenda = valorTotal;
+            vendaDTO.DataVenda = DateTime.Now;
 
             return await _vendaRepositorio.Criar(vendaDTO);
         }
+
 
         public async Task<IEnumerable<Venda>> HistoricoCliente(int usuarioId)
         {
@@ -76,7 +79,7 @@ namespace IteraDisc.Aplicacao
         {
             var vendaDominio = _vendaRepositorio.Obter(vendaId);
 
-            if(vendaDominio == null)
+            if (vendaDominio == null)
                 throw new Exception("Venda não encontrada!");
 
             return await vendaDominio;

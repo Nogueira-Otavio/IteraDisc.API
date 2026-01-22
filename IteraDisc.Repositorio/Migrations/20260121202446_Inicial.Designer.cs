@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IteraDisc.Repositorio.Migrations
 {
     [DbContext(typeof(IteraDiscContexto))]
-    [Migration("20260121180056_RelacionamentoProdutoItemVenda")]
-    partial class RelacionamentoProdutoItemVenda
+    [Migration("20260121202446_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("ValorItemVenda");
 
-                    b.Property<int>("VendaId")
+                    b.Property<int?>("VendaId")
                         .HasColumnType("int")
                         .HasColumnName("VendaId");
 
@@ -146,6 +146,9 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataVenda");
 
+                    b.Property<string>("ItensId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int")
                         .HasColumnName("UsuarioId");
@@ -172,9 +175,7 @@ namespace IteraDisc.Repositorio.Migrations
 
                     b.HasOne("IteraDisc.Dominio.Entidades.Venda", "Venda")
                         .WithMany("Itens")
-                        .HasForeignKey("VendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VendaId");
 
                     b.Navigation("Produto");
 

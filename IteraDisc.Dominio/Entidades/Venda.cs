@@ -15,5 +15,11 @@ namespace IteraDisc.Dominio.Entidades
 
         public List<int> ItensId { get; set; }
         public List<ItemVenda> Itens { get; set; }
+
+        public Venda()
+        {
+            Itens = new List<ItemVenda>();
+            ItensId = new List<int>();
+        }
     }
 }

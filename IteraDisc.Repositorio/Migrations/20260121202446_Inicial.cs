@@ -52,7 +52,8 @@ namespace IteraDisc.Repositorio.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
                     DataVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ValorTotalVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    ValorTotalVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    ItensId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,18 +76,28 @@ namespace IteraDisc.Repositorio.Migrations
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorItemVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Vendido = table.Column<bool>(type: "bit", nullable: false),
-                    VendaId = table.Column<int>(type: "int", nullable: false)
+                    VendaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItemVenda", x => x.ItemVendaId);
                     table.ForeignKey(
+                        name: "FK_ItemVenda_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "ProdutoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_ItemVenda_Venda_VendaId",
                         column: x => x.VendaId,
                         principalTable: "Venda",
-                        principalColumn: "VendaId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "VendaId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemVenda_ProdutoId",
+                table: "ItemVenda",
+                column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemVenda_VendaId",

@@ -25,17 +25,18 @@ namespace IteraDisc.Repositorio
 
         public async Task<IEnumerable<Venda>> HistoricoCliente(int usuarioId)
         {
-            return await _contexto.Vendas.Where(v => v.UsuarioId == usuarioId).ToListAsync();
+            return await _contexto.Vendas.Include(v => v.Itens).Where(v => v.UsuarioId == usuarioId).ToListAsync();
         }
 
         public async Task<IEnumerable<Venda>> Listar()
         {
-            return await _contexto.Vendas.ToListAsync();
+            return await _contexto.Vendas.Include(v => v.Itens).ToListAsync();
         }
 
         public async Task<Venda> Obter(int vendaId)
         {
             return await _contexto.Vendas
+                        .Include(v => v.Itens)
                         .Where(venda => venda.VendaId == vendaId)
                         .FirstOrDefaultAsync();
         }

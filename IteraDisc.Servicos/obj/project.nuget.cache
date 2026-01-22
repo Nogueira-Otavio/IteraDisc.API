@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "n56Dqb9Vu5k=",
+  "dgSpecHash": "yecSLWQuC6A=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tarde\\Desktop\\Tavin gameplays\\Projeto de Conclusão\\IteraDisc.API\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj",
+  "projectFilePath": "C:\\Users\\otavi\\OneDrive\\Desktop\\IteraDisc\\IteraDisc.Servicos\\IteraDisc.Servicos.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Tarde\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+    "C:\\Users\\otavi\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
   ],
   "logs": []
 }
