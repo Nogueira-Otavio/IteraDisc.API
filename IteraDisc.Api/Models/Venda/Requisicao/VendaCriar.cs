@@ -9,8 +9,6 @@ namespace IteraDisc.Api.Models.Venda.Requisicao
     public class VendaCriar
     {
         public int UsuarioId { get; set; }
-        public DateTime DataVenda { get; set; }
-        public decimal ValorTotalVenda { get; set; }
         public List<int> Itens { get; set; }
     }
 }

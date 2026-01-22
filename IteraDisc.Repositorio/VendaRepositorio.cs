@@ -23,6 +23,11 @@ namespace IteraDisc.Repositorio
             return venda.VendaId;
         }
 
+        public async Task Atualizar(Venda venda)
+        {
+            _contexto.Vendas.Update(venda);
+            await _contexto.SaveChangesAsync();
+        }
         public async Task<IEnumerable<Venda>> HistoricoCliente(int usuarioId)
         {
             return await _contexto.Vendas.Include(v => v.Itens).Where(v => v.UsuarioId == usuarioId).ToListAsync();

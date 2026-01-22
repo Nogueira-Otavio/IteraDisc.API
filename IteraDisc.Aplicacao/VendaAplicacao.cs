@@ -23,45 +23,47 @@ namespace IteraDisc.Aplicacao
             _produtoRepositorio = produtoRepositorio;
         }
 
-        public async Task<int> Criar(Venda vendaDTO)
+        public async Task<int> Criar(int usuarioId, List<int> itensIds)
         {
-            if (vendaDTO == null)
-                throw new Exception("Venda não pode ser vazia!");
+            if (itensIds == null || !itensIds.Any())
+                throw new Exception("A venda deve conter ao menos um item.");
 
-            var usuarioDominio = await _usuarioRepositorio.Obter(vendaDTO.UsuarioId, true);
-            if (usuarioDominio == null)
-                throw new Exception("Usuário não encontrado!");
+            var usuario = await _usuarioRepositorio.Obter(usuarioId, true);
+            if (usuario == null)
+                throw new Exception("Usuário não encontrado.");
 
-            vendaDTO.Usuario = usuarioDominio;
-            vendaDTO.Itens = new List<ItemVenda>();
-
-            decimal valorTotal = 0;
-
-            foreach (int itemVendaId in vendaDTO.ItensId)
+            var venda = new Venda
             {
-                // Busca o itemVenda que ainda não foi vendido
-                var itemVendaDominio = await _itemVendaRepositorio.Obter(itemVendaId, false);
+                UsuarioId = usuarioId,
+                Usuario = usuario,
+                DataVenda = DateTime.Now,
+                ValorTotalVenda = 0
+            };
 
-                if (itemVendaDominio == null)
-                    throw new Exception($"O item de venda {itemVendaId} não existe ou já foi vendido.");
+            await _vendaRepositorio.Criar(venda);
 
-                // Marca como vendido
-                itemVendaDominio.Vendido = true;
-                itemVendaDominio.VendaId = vendaDTO.VendaId;
+            decimal total = 0;
 
-                await _itemVendaRepositorio.Atualizar(itemVendaDominio);
+            foreach (var itemId in itensIds)
+            {
+                var item = await _itemVendaRepositorio.Obter(itemId, false);
 
-                // Adiciona na lista da venda
-                vendaDTO.Itens.Add(itemVendaDominio);
+                if (item == null)
+                    throw new Exception($"ItemVenda {itemId} não existe ou já foi vendido.");
 
-                // Soma no total da venda
-                valorTotal += itemVendaDominio.ValorItemVenda;
+                item.Vendido = true;
+                item.VendaId = venda.VendaId;
+
+                await _itemVendaRepositorio.Atualizar(item);
+
+                venda.Itens.Add(item);
+                total += item.ValorItemVenda;
             }
 
-            vendaDTO.ValorTotalVenda = valorTotal;
-            vendaDTO.DataVenda = DateTime.Now;
+            venda.ValorTotalVenda = total;
+            await _vendaRepositorio.Atualizar(venda);
 
-            return await _vendaRepositorio.Criar(vendaDTO);
+            return venda.VendaId;
         }
 
 

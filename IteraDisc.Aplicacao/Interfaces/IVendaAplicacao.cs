@@ -8,7 +8,7 @@ namespace IteraDisc.Aplicacao.Interfaces
 {
     public interface IVendaAplicacao
     {
-        Task<int> Criar(Venda venda);
+        Task<int> Criar(int usuarioId, List<int> itensIds);
         Task<Venda> Obter(int vendaId);
         Task<IEnumerable<Venda>> Listar();
         Task<IEnumerable<Venda>> HistoricoCliente(int usuarioId);

@@ -30,21 +30,16 @@ namespace IteraDisc.Api.Controllers
 
         [HttpPost]
         [Route("Criar")]
-        public async Task<ActionResult> Criar([FromBody] VendaCriar vendaCriar)
+        public async Task<ActionResult<int>> Criar([FromBody] VendaCriar request)
         {
             try
             {
-                var vendaDominio = new Venda()
-                {
-                    UsuarioId = vendaCriar.UsuarioId,
-                    DataVenda = vendaCriar.DataVenda,
-                    ValorTotalVenda = vendaCriar.ValorTotalVenda,
-                    ItensId = new List<int>(vendaCriar.Itens)
-                };
+                var vendaId = await _vendaAplicacao.Criar(
+                    request.UsuarioId,
+                    request.Itens
+                );
 
-                var vendaID = await _vendaAplicacao.Criar(vendaDominio);
-
-                return Ok(vendaID);
+                return Ok(vendaId);
             }
             catch (Exception ex)
             {
@@ -66,7 +61,16 @@ namespace IteraDisc.Api.Controllers
                     UsuarioId = vendaDominio.UsuarioId,
                     DataVenda = vendaDominio.DataVenda,
                     ValorTotalVenda = vendaDominio.ValorTotalVenda,
-                    Itens = vendaDominio.Itens
+                    Itens = vendaDominio.Itens.Select(i => new ItemVendaResponse()
+                    {
+                        ItemVendaId = i.ItemVendaId,
+                        ProdutoId = i.ProdutoId,
+                        Produto = i.Produto,
+                        Quantidade = i.Quantidade,
+                        ValorItemVenda = i.ValorItemVenda,
+                        Vendido = i.Vendido,
+                        VendaId = i.VendaId
+                    }).ToList()
                 };
 
                 return Ok(venda);
@@ -91,10 +95,15 @@ namespace IteraDisc.Api.Controllers
                     UsuarioId = v.UsuarioId,
                     DataVenda = v.DataVenda,
                     ValorTotalVenda = v.ValorTotalVenda,
-                    Itens = v.Itens.Select(i => new ItemVenda()
+                    Itens = v.Itens.Select(i => new ItemVendaResponse()
                     {
                         ItemVendaId = i.ItemVendaId,
-                        ProdutoId = i.ProdutoId                    
+                        ProdutoId = i.ProdutoId,
+                        Produto = i.Produto,
+                        Quantidade = i.Quantidade,
+                        ValorItemVenda = i.ValorItemVenda,
+                        Vendido = i.Vendido,
+                        VendaId = i.VendaId
                     }).ToList()
                 }).ToList();
 
@@ -121,7 +130,16 @@ namespace IteraDisc.Api.Controllers
                     UsuarioId = v.UsuarioId,
                     DataVenda = v.DataVenda,
                     ValorTotalVenda = v.ValorTotalVenda,
-                    Itens = v.Itens
+                    Itens = v.Itens.Select(i => new ItemVendaResponse()
+                    {
+                        ItemVendaId = i.ItemVendaId,
+                        ProdutoId = i.ProdutoId,
+                        Produto = i.Produto,
+                        Quantidade = i.Quantidade,
+                        ValorItemVenda = i.ValorItemVenda,
+                        Vendido = i.Vendido,
+                        VendaId = i.VendaId
+                    }).ToList()
                 }).ToList();
 
                 return Ok(vendas);
