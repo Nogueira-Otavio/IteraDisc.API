@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IteraDisc.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5da662034a961fb4cf543c903abb53ab3e62068")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+479cb011643e1ff3f545681f69d14656160e09cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("IteraDisc.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IteraDisc.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
