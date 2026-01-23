@@ -13,6 +13,8 @@ namespace IteraDisc.Dominio.Entidades
         public string Senha { get; set; }
         public bool Ativo { get; set; }
 
+        public List<Venda> Vendas { get; set; }
+
         public Usuario()
         {
             Ativo = true;
