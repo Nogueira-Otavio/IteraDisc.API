@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using IteraDisc.Api.Models.ItemVenda.Resposta;
+using IteraDisc.Api.Models.Produtos.Resposta;
 using IteraDisc.Api.Models.Venda.Requisicao;
 using IteraDisc.Api.Models.Venda.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
@@ -65,7 +66,14 @@ namespace IteraDisc.Api.Controllers
                     {
                         ItemVendaId = i.ItemVendaId,
                         ProdutoId = i.ProdutoId,
-                        Produto = i.Produto,
+                        Produto = new ProdutoResponseDTO
+                        {
+                          ProdutoId = i.ProdutoId,
+                          Nome = i.Produto.Nome,
+                          Descricao = i.Produto.Descricao,
+                          Preco = i.Produto.Preco
+
+                        },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
                         Vendido = i.Vendido,
@@ -99,7 +107,14 @@ namespace IteraDisc.Api.Controllers
                     {
                         ItemVendaId = i.ItemVendaId,
                         ProdutoId = i.ProdutoId,
-                        Produto = i.Produto,
+                        Produto = new ProdutoResponseDTO
+                        {
+                          ProdutoId = i.ProdutoId,
+                          Nome = i.Produto.Nome,
+                          Descricao = i.Produto.Descricao,
+                          Preco = i.Produto.Preco
+
+                        },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
                         Vendido = i.Vendido,
@@ -134,7 +149,14 @@ namespace IteraDisc.Api.Controllers
                     {
                         ItemVendaId = i.ItemVendaId,
                         ProdutoId = i.ProdutoId,
-                        Produto = i.Produto,
+                        Produto = new ProdutoResponseDTO
+                        {
+                          ProdutoId = i.ProdutoId,
+                          Nome = i.Produto.Nome,
+                          Descricao = i.Produto.Descricao,
+                          Preco = i.Produto.Preco
+
+                        },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
                         Vendido = i.Vendido,

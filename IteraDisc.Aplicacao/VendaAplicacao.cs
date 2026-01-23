@@ -47,15 +47,18 @@ namespace IteraDisc.Aplicacao
             foreach (var itemId in itensIds)
             {
                 var item = await _itemVendaRepositorio.Obter(itemId, false);
+                var produto = await _produtoRepositorio.Obter(item.ProdutoId, true);
 
                 if (item == null)
                     throw new Exception($"ItemVenda {itemId} não existe ou já foi vendido.");
 
                 item.Vendido = true;
                 item.VendaId = venda.VendaId;
+                produto.EmEstoque -= item.Quantidade;
 
                 await _itemVendaRepositorio.Atualizar(item);
-
+                await _produtoRepositorio.Atualizar(produto);
+                
                 venda.Itens.Add(item);
                 total += item.ValorItemVenda;
             }
