@@ -32,6 +32,18 @@ namespace IteraDisc.Aplicacao
             if (usuario == null)
                 throw new Exception("Usuário não encontrado.");
 
+            var itensValidos = new List<ItemVenda>();
+
+            foreach (var itemId in itensIds)
+            {
+                var item = await _itemVendaRepositorio.Obter(itemId, false, false);
+
+                if (item == null)
+                    throw new Exception($"O item {itemId} não existe, já foi vendido ou foi descartado.");
+
+                itensValidos.Add(item);
+            }
+
             var venda = new Venda
             {
                 UsuarioId = usuarioId,
@@ -44,21 +56,21 @@ namespace IteraDisc.Aplicacao
 
             decimal total = 0;
 
-            foreach (var itemId in itensIds)
+            foreach (var item in itensValidos)
             {
-                var item = await _itemVendaRepositorio.Obter(itemId, false);
                 var produto = await _produtoRepositorio.Obter(item.ProdutoId, true);
 
-                if (item == null)
-                    throw new Exception($"ItemVenda {itemId} não existe ou já foi vendido.");
+                if (produto.EmEstoque < item.Quantidade)
+                    throw new Exception($"Estoque insuficiente para o produto {produto.Nome}");
 
                 item.Vendido = true;
                 item.VendaId = venda.VendaId;
+
                 produto.EmEstoque -= item.Quantidade;
 
                 await _itemVendaRepositorio.Atualizar(item);
                 await _produtoRepositorio.Atualizar(produto);
-                
+
                 venda.Itens.Add(item);
                 total += item.ValorItemVenda;
             }
@@ -68,6 +80,7 @@ namespace IteraDisc.Aplicacao
 
             return venda.VendaId;
         }
+
 
 
         public async Task<IEnumerable<Venda>> HistoricoCliente(int usuarioId)

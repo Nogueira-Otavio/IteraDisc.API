@@ -21,7 +21,7 @@ namespace IteraDisc.Aplicacao
 
         public async Task Atualizar(ItemVenda itemVenda)
         {
-            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVenda.ItemVendaId, false);
+            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVenda.ItemVendaId, false, false);
             var produtoDominio = await _produtoRepositorio.Obter(itemVenda.ProdutoId, true);
 
             if(itemVendaDominio == null)
@@ -63,14 +63,26 @@ namespace IteraDisc.Aplicacao
             return await _iTemVendaRepositorio.Criar(itemVendaDTO);
         }
 
-        public async Task<IEnumerable<ItemVenda>> Listar(bool vendido)
+        public async Task Descartar(int itemVendaId)
         {
-            return await _iTemVendaRepositorio.Listar(vendido);
+            var itemVendaDominio = await _iTemVendaRepositorio.Obter(itemVendaId, false, false);
+
+            if(itemVendaDominio == null)
+                throw new Exception("ItemVenda não encontrado!");
+
+            itemVendaDominio.Descartar();
+
+            await _iTemVendaRepositorio.Atualizar(itemVendaDominio);
         }
 
-        public async Task<ItemVenda> Obter(int itemVendaId, bool vendido)
+        public async Task<IEnumerable<ItemVenda>> Listar(bool vendido, bool descartado)
         {
-            var itemVendaDominio = _iTemVendaRepositorio.Obter(itemVendaId, vendido);
+            return await _iTemVendaRepositorio.Listar(vendido, descartado);
+        }
+
+        public async Task<ItemVenda> Obter(int itemVendaId, bool vendido, bool descartado)
+        {
+            var itemVendaDominio = _iTemVendaRepositorio.Obter(itemVendaId, vendido, descartado);
 
             if(itemVendaDominio == null)
                 throw new Exception("ItemVenda não encontrado!");

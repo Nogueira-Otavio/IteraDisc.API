@@ -10,7 +10,8 @@ namespace IteraDisc.Aplicacao.Interfaces
     {
         Task<int> Criar(ItemVenda itemVenda);
         Task Atualizar(ItemVenda itemVenda);
-        Task<ItemVenda> Obter(int itemVendaId, bool vendido);
-        Task<IEnumerable<ItemVenda>> Listar(bool vendido);
+        Task Descartar(int itemVendaId);
+        Task<ItemVenda> Obter(int itemVendaId, bool vendidom, bool descartado);
+        Task<IEnumerable<ItemVenda>> Listar(bool vendido, bool descartado);
     }
 }
