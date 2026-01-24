@@ -315,3 +315,5 @@ charts/**/charts/
 charts/**/tmp/
 *.kubeconfig
 .kube/
+
+appsettings.Development.Local.json
