@@ -29,16 +29,22 @@ namespace IteraDisc.Repositorio
             return itemVenda.ItemVendaId;
         }
 
-        public async Task<IEnumerable<ItemVenda>> Listar(bool vendido)
-        {
-            return await _contexto.ItemVendas.Where(itemVenda => itemVenda.Vendido == vendido).ToListAsync();
-        }
-
-        public async Task<ItemVenda> Obter(int itemVendaId, bool vendido)
+        public async Task<IEnumerable<ItemVenda>> Listar(bool vendido, bool descartado)
         {
             return await _contexto.ItemVendas
+                        .Include(iv => iv.Produto)
+                        .Where(itemVenda => itemVenda.Vendido == vendido)
+                        .Where(itemVenda => itemVenda.Descartado == descartado)
+                        .ToListAsync();
+        }
+
+        public async Task<ItemVenda> Obter(int itemVendaId, bool vendido, bool descartado)
+        {
+            return await _contexto.ItemVendas
+                        .Include(iv => iv.Produto)
                         .Where(itemVenda => itemVenda.ItemVendaId == itemVendaId)
                         .Where(itemVenda => itemVenda.Vendido == vendido)
+                        .Where(itemVenda => itemVenda.Descartado == descartado)
                         .FirstOrDefaultAsync();
         }
     }

@@ -12,6 +12,7 @@ namespace IteraDisc.Dominio.Entidades
         public Produto Produto { get; set; }
         public int Quantidade { get; set; }
         public decimal ValorItemVenda { get; set; }
+        public bool Descartado { get; set; }
         public bool Vendido { get; set; }
         
         public int? VendaId { get; set; }
@@ -19,8 +20,14 @@ namespace IteraDisc.Dominio.Entidades
 
         public ItemVenda()
         {
+            Descartado = false;
             Vendido = false;
             VendaId = null;
+        }
+
+        public void Descartar()
+        {
+            Descartado = true;
         }
     }
 }
