@@ -133,7 +133,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        public async Task<ActionResult> List([FromQuery] bool ativos)
+        public async Task<ActionResult> Listar([FromQuery] bool ativos)
         {
             try
             {

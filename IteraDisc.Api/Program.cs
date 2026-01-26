@@ -35,6 +35,17 @@ builder.Services.AddScoped<IVendaRepositorio, VendaRepositorio>();
 // Add services
 builder.Services.AddHttpClient<IGroqService, GroqService>();
 
+builder.Services.AddCors(options =>
+{
+   options.AddDefaultPolicy(builder =>
+   {
+       builder.WithOrigins("http://localhost:3000")
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+   }) ;
+});
+
 builder.Services.AddControllers();
 
 // Add database services
@@ -49,6 +60,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
