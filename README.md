@@ -190,5 +190,4 @@ Este projeto representa a base lógica da aplicação IteraDisc.
 Ele foi desenvolvido com foco em organização, boas práticas e estrutura profissional de uma API REST real.
 
 ```
-Quando você quiser, eu faço o do front depois, separado, do mesmo jeito.
-```
+
