@@ -19,27 +19,22 @@ builder.Configuration
     .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
     .AddJsonFile("appsettings.Development.Local.json", optional: true, reloadOnChange: true);
 
-// Groq
 builder.Services.Configure<GroqSettings>(builder.Configuration.GetSection("GroqSettings"));
 
-// Aplicação
 builder.Services.AddScoped<IUsuarioAplicacao, UsuarioAplicacao>();
 builder.Services.AddScoped<IProdutoAplicao, ProdutoAplicaco>();
 builder.Services.AddScoped<IItemVendaAplicacao, ItemVendaAplicacao>();
 builder.Services.AddScoped<IVendaAplicacao, VendaAplicacao>();
 builder.Services.AddScoped<IGroqServiceAplicacao, GroqServiceAplicacao>();
 
-// Repositórios
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 builder.Services.AddScoped<IITemVendaRepositorio, ItemVendaRepositorio>();
 builder.Services.AddScoped<IVendaRepositorio, VendaRepositorio>();
 
-// Serviços
 builder.Services.AddHttpClient<IGroqService, GroqService>();
 builder.Services.AddScoped<TokenService>();
 
-// JWT Authentication
 var jwtKey = builder.Configuration["Jwt:SecretKey"];
 var key = Encoding.UTF8.GetBytes(jwtKey);
 
@@ -62,7 +57,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -78,7 +72,33 @@ builder.Services.AddDbContext<IteraDiscContexto>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Insira o token JWT"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -90,7 +110,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 app.UseHttpsRedirection();
-app.UseAuthentication(); // <-- ANTES do UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

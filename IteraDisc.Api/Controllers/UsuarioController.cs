@@ -25,6 +25,7 @@ namespace IteraDisc.Api.Controllers
             _usuarioAplicacao = usuarioAplicacao;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("Criar")]
         public async Task<ActionResult> Criar([FromBody] UsuarioCriar usuarioCriar)
