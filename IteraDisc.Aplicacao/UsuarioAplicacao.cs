@@ -27,6 +27,8 @@ namespace IteraDisc.Aplicacao
             if (string.IsNullOrEmpty(usuario.Senha))
                 throw new Exception("Senha do usúario não pode ser vazia!");
 
+            usuario.Senha = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
+
             return await _usuarioRepositorio.Salvar(usuario);
         }
 
@@ -52,10 +54,10 @@ namespace IteraDisc.Aplicacao
             if(usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
-            if(usuarioDominio.Senha != senhaAntiga)
+            if(!BCrypt.Net.BCrypt.Verify(senhaAntiga, usuarioDominio.Senha))
                 throw new Exception("Senha antiga inválida!");
 
-            usuarioDominio.Senha = usuario.Senha;
+            usuarioDominio.Senha = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
 
             await _usuarioRepositorio.Atualizar(usuarioDominio);
         }
@@ -70,7 +72,7 @@ namespace IteraDisc.Aplicacao
             return await usuarioDominio;
         }
 
-         public async Task<Usuario> ObterPorEmail(string email)
+        public async Task<Usuario> ObterPorEmail(string email)
         {
             var usuarioDominio = _usuarioRepositorio.ObterPorEmail(email);
 

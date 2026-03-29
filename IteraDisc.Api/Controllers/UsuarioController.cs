@@ -9,9 +9,11 @@ using IteraDisc.Dominio.Entidades;
 using IteraDisc.Aplicacao.Interfaces;
 using IteraDisc.Api.Models.Usuarios.Requisicao;
 using IteraDisc.Api.Models.Usuarios.Resposta;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IteraDisc.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsuarioController : ControllerBase

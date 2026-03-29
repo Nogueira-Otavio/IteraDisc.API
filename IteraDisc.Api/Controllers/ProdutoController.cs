@@ -8,11 +8,13 @@ using IteraDisc.Api.Models.Produtos.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
 using IteraDisc.Dominio.Entidades;
 using IteraDisc.Repositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProdutoController : ControllerBase

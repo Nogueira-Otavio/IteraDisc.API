@@ -9,11 +9,13 @@ using IteraDisc.Api.Models.Venda.Requisicao;
 using IteraDisc.Api.Models.Venda.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
 using IteraDisc.Dominio.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class VendaController : ControllerBase
