@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using IteraDisc.Api.Models.GroqService.Requisicao;
 using IteraDisc.Aplicacao.Interfaces;
 using IteraDisc.Dominio.Entidades.GroqService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class GroqServiceController : ControllerBase
