@@ -38,7 +38,8 @@ namespace IteraDisc.Api.Controllers
                 {
                     Token = token,
                     Nome = usuario.Nome,
-                    UsuarioId = usuario.UsuarioId
+                    UsuarioId = usuario.UsuarioId,
+                    Perfil = usuario.Perfil
                 });
             }
             catch (Exception ex)
