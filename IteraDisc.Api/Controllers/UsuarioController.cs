@@ -36,7 +36,8 @@ namespace IteraDisc.Api.Controllers
                 {
                     Nome = usuarioCriar.Nome,
                     Email = usuarioCriar.Email,
-                    Senha = usuarioCriar.Senha
+                    Senha = usuarioCriar.Senha,
+                    Perfil = usuarioCriar.Perfil
                 };
 
                 var usuarioID = await _usuarioAplicacao.Criar(usuarioDominio);
@@ -120,6 +121,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpDelete]
         [Route("Deletar/{usuarioId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Deletar([FromRoute] int usuarioId)
         {
             try
@@ -136,6 +138,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpPut]
         [Route("Restaurar/{usuarioId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Restaurar([FromRoute] int usuarioId)
         {
             try
@@ -152,6 +155,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> List([FromQuery] bool ativos)
         {
             try

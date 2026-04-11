@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IteraDisc.Repositorio.Migrations
 {
     [DbContext(typeof(IteraDiscContexto))]
-    [Migration("20260121202446_Inicial")]
+    [Migration("20260411183757_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -33,6 +33,10 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnName("ItemVendaId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemVendaId"));
+
+                    b.Property<bool>("Descartado")
+                        .HasColumnType("bit")
+                        .HasColumnName("Descartado");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int")
@@ -123,6 +127,11 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
 
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Perfil");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -145,9 +154,6 @@ namespace IteraDisc.Repositorio.Migrations
                     b.Property<DateTime>("DataVenda")
                         .HasColumnType("datetime2")
                         .HasColumnName("DataVenda");
-
-                    b.Property<string>("ItensId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int")

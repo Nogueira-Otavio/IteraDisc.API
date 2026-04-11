@@ -28,6 +28,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpPost]
         [Route("Criar")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Criar([FromBody] ProdutoCriar produtoCriar)
         {
             try
@@ -52,6 +53,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpPut]
         [Route("Atualizar")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Atualizar([FromBody] ProdutoAtualizar produtoAtualizar)
         {
             try
@@ -103,6 +105,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpDelete]
         [Route("Deletar/{produtoId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Deletar([FromRoute] int produtoId)
         {
             try
@@ -119,6 +122,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpPut]
         [Route("Restaurar/{produtoId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Restaurar([FromRoute] int produtoId)
         {
             try

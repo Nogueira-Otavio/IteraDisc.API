@@ -37,6 +37,7 @@ namespace IteraDisc.Repositorio.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Perfil = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -52,8 +53,7 @@ namespace IteraDisc.Repositorio.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
                     DataVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ValorTotalVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    ItensId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ValorTotalVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,6 +75,7 @@ namespace IteraDisc.Repositorio.Migrations
                     ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorItemVenda = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Descartado = table.Column<bool>(type: "bit", nullable: false),
                     Vendido = table.Column<bool>(type: "bit", nullable: false),
                     VendaId = table.Column<int>(type: "int", nullable: true)
                 },

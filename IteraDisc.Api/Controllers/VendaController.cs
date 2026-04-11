@@ -93,6 +93,7 @@ namespace IteraDisc.Api.Controllers
 
         [HttpGet]
         [Route("Listar")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Listar([FromRoute] Venda venda)
         {
             try

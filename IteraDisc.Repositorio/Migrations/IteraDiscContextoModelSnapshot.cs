@@ -124,6 +124,11 @@ namespace IteraDisc.Repositorio.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
 
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Perfil");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")

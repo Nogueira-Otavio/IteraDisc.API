@@ -25,7 +25,8 @@ namespace IteraDisc.Api.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Nome),
-                new Claim(ClaimTypes.Email, usuario.Email)
+                new Claim(ClaimTypes.Email, usuario.Email),
+                new Claim(ClaimTypes.Role, usuario.Perfil)
             };
 
             var expiration = DateTime.UtcNow.AddMinutes(

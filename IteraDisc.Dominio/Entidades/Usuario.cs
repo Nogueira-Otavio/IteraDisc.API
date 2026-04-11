@@ -11,6 +11,7 @@ namespace IteraDisc.Dominio.Entidades
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public string Perfil { get; set; }
         public bool Ativo { get; set; }
 
         public List<Venda> Vendas { get; set; }
@@ -18,6 +19,7 @@ namespace IteraDisc.Dominio.Entidades
         public Usuario()
         {
             Ativo = true;
+            Perfil = "Cliente";
         }
 
         public void Deletar()
