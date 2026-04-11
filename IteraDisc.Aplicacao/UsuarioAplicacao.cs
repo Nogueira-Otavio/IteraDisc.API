@@ -24,6 +24,10 @@ namespace IteraDisc.Aplicacao
 
             ValidarInformacoesUsuario(usuario);
 
+            var usuarioExistente = await _usuarioRepositorio.ObterPorEmail(usuario.Email);
+            if (usuarioExistente != null)
+                throw new Exception("Já existe uma conta cadastrada com este e-mail!");
+
             if (string.IsNullOrEmpty(usuario.Senha))
                 throw new Exception("Senha do usúario não pode ser vazia!");
 
@@ -36,7 +40,7 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = await _usuarioRepositorio.Obter(usuario.UsuarioId, true);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
             ValidarInformacoesUsuario(usuario);
@@ -51,10 +55,10 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = await _usuarioRepositorio.Obter(usuario.UsuarioId, true);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
-            if(!BCrypt.Net.BCrypt.Verify(senhaAntiga, usuarioDominio.Senha))
+            if (!BCrypt.Net.BCrypt.Verify(senhaAntiga, usuarioDominio.Senha))
                 throw new Exception("Senha antiga inválida!");
 
             usuarioDominio.Senha = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
@@ -66,7 +70,7 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = _usuarioRepositorio.Obter(usuarioId, true);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
             return await usuarioDominio;
@@ -76,7 +80,7 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = _usuarioRepositorio.ObterPorEmail(email);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
             return await usuarioDominio;
@@ -86,7 +90,7 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = await _usuarioRepositorio.Obter(usuarioId, true);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
             usuarioDominio.Deletar();
@@ -98,7 +102,7 @@ namespace IteraDisc.Aplicacao
         {
             var usuarioDominio = await _usuarioRepositorio.Obter(usuarioId, false);
 
-            if(usuarioDominio == null)
+            if (usuarioDominio == null)
                 throw new Exception("Usuário não encontrado!");
 
             usuarioDominio.Restaurar();
