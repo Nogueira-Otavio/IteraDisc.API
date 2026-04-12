@@ -11,6 +11,7 @@ namespace IteraDisc.Api.Models.Venda.Resposta
     {
         public int VendaId { get; set; }
         public int UsuarioId { get; set; }
+        public string NomeCliente { get; set; }
         public DateTime DataVenda { get; set; }
         public decimal ValorTotalVenda { get; set; }
         public List<ItemVendaResponse> Itens { get; set; }

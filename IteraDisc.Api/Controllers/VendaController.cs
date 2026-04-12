@@ -104,6 +104,7 @@ namespace IteraDisc.Api.Controllers
                 {
                     VendaId = v.VendaId,
                     UsuarioId = v.UsuarioId,
+                    NomeCliente = v.Usuario?.Nome,
                     DataVenda = v.DataVenda,
                     ValorTotalVenda = v.ValorTotalVenda,
                     Itens = v.Itens.Select(i => new ItemVendaResponse()

@@ -40,9 +40,10 @@ namespace IteraDisc.Repositorio
         public async Task<IEnumerable<Venda>> Listar()
         {
             return await _contexto.Vendas
-                        .Include(v => v.Itens)
-                            .ThenInclude(i => i.Produto)
-                        .ToListAsync();
+                .Include(v => v.Itens)
+                    .ThenInclude(i => i.Produto)
+                .Include(v => v.Usuario)
+                .ToListAsync();
         }
 
         public async Task<Venda> Obter(int vendaId)
