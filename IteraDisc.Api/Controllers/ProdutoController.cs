@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using IteraDisc.Api.Models.Produtos.Requisicao;
 using IteraDisc.Api.Models.Produtos.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
+using IteraDisc.Dominio.DTOs;
 using IteraDisc.Dominio.Entidades;
-using IteraDisc.Repositorio;
+using IteraDisc.Repositorio.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
@@ -20,10 +15,14 @@ namespace IteraDisc.Api.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoAplicao _produtoAplicao;
+        private readonly IDapperProdutoRepositorio _dapperProdutoRepositorio;
 
-        public ProdutoController(IProdutoAplicao produtoAplicao)
+        public ProdutoController(
+            IProdutoAplicao produtoAplicao,
+            IDapperProdutoRepositorio dapperProdutoRepositorio)
         {
             _produtoAplicao = produtoAplicao;
+            _dapperProdutoRepositorio = dapperProdutoRepositorio;
         }
 
         [HttpPost]
@@ -42,7 +41,6 @@ namespace IteraDisc.Api.Controllers
                 };
 
                 var produtoID = await _produtoAplicao.Criar(produtoDominio);
-
                 return Ok(produtoID);
             }
             catch (Exception ex)
@@ -67,13 +65,11 @@ namespace IteraDisc.Api.Controllers
                     EmEstoque = produtoAtualizar.EmEstoque
                 };
 
-               await _produtoAplicao.Atualizar(produtoDominio);
-
+                await _produtoAplicao.Atualizar(produtoDominio);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
@@ -111,7 +107,6 @@ namespace IteraDisc.Api.Controllers
             try
             {
                 await _produtoAplicao.Deletar(produtoId);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -128,7 +123,6 @@ namespace IteraDisc.Api.Controllers
             try
             {
                 await _produtoAplicao.Restaurar(produtoId);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -155,6 +149,22 @@ namespace IteraDisc.Api.Controllers
                 }).ToList();
 
                 return Ok(produtos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("EstoqueBaixo")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> EstoqueBaixo([FromQuery] int limite = 5)
+        {
+            try
+            {
+                var resultado = await _dapperProdutoRepositorio.ProdutosEstoqueBaixo(limite);
+                return Ok(resultado);
             }
             catch (Exception ex)
             {

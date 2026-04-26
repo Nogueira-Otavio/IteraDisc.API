@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using IteraDisc.Api.Models.ItemVenda.Resposta;
 using IteraDisc.Api.Models.Produtos.Resposta;
 using IteraDisc.Api.Models.Venda.Requisicao;
 using IteraDisc.Api.Models.Venda.Resposta;
 using IteraDisc.Aplicacao.Interfaces;
+using IteraDisc.Dominio.DTOs;
 using IteraDisc.Dominio.Entidades;
+using IteraDisc.Repositorio.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace IteraDisc.Api.Controllers
 {
@@ -23,12 +19,18 @@ namespace IteraDisc.Api.Controllers
         private readonly IVendaAplicacao _vendaAplicacao;
         private readonly IItemVendaAplicacao _itemVendaAplicacao;
         private readonly IUsuarioAplicacao _usuarioAplicacao;
+        private readonly IDapperVendaRepositorio _dapperVendaRepositorio;
 
-        public VendaController(IVendaAplicacao vendaAplicacao, IItemVendaAplicacao itemVendaAplicacao, IUsuarioAplicacao usuarioAplicacao)
+        public VendaController(
+            IVendaAplicacao vendaAplicacao,
+            IItemVendaAplicacao itemVendaAplicacao,
+            IUsuarioAplicacao usuarioAplicacao,
+            IDapperVendaRepositorio dapperVendaRepositorio)
         {
             _vendaAplicacao = vendaAplicacao;
             _itemVendaAplicacao = itemVendaAplicacao;
             _usuarioAplicacao = usuarioAplicacao;
+            _dapperVendaRepositorio = dapperVendaRepositorio;
         }
 
         [HttpPost]
@@ -41,7 +43,6 @@ namespace IteraDisc.Api.Controllers
                     request.UsuarioId,
                     request.Itens
                 );
-
                 return Ok(vendaId);
             }
             catch (Exception ex)
@@ -70,11 +71,10 @@ namespace IteraDisc.Api.Controllers
                         ProdutoId = i.ProdutoId,
                         Produto = new ProdutoResponseDTO
                         {
-                          ProdutoId = i.ProdutoId,
-                          Nome = i.Produto.Nome,
-                          Descricao = i.Produto.Descricao,
-                          Preco = i.Produto.Preco
-
+                            ProdutoId = i.ProdutoId,
+                            Nome = i.Produto.Nome,
+                            Descricao = i.Produto.Descricao,
+                            Preco = i.Produto.Preco
                         },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
@@ -94,7 +94,7 @@ namespace IteraDisc.Api.Controllers
         [HttpGet]
         [Route("Listar")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Listar([FromRoute] Venda venda)
+        public async Task<ActionResult> Listar()
         {
             try
             {
@@ -113,11 +113,10 @@ namespace IteraDisc.Api.Controllers
                         ProdutoId = i.ProdutoId,
                         Produto = new ProdutoResponseDTO
                         {
-                          ProdutoId = i.ProdutoId,
-                          Nome = i.Produto.Nome,
-                          Descricao = i.Produto.Descricao,
-                          Preco = i.Produto.Preco
-
+                            ProdutoId = i.ProdutoId,
+                            Nome = i.Produto.Nome,
+                            Descricao = i.Produto.Descricao,
+                            Preco = i.Produto.Preco
                         },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
@@ -133,7 +132,6 @@ namespace IteraDisc.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpGet]
         [Route("HistoricoCliente")]
@@ -155,11 +153,10 @@ namespace IteraDisc.Api.Controllers
                         ProdutoId = i.ProdutoId,
                         Produto = new ProdutoResponseDTO
                         {
-                          ProdutoId = i.ProdutoId,
-                          Nome = i.Produto.Nome,
-                          Descricao = i.Produto.Descricao,
-                          Preco = i.Produto.Preco
-
+                            ProdutoId = i.ProdutoId,
+                            Nome = i.Produto.Nome,
+                            Descricao = i.Produto.Descricao,
+                            Preco = i.Produto.Preco
                         },
                         Quantidade = i.Quantidade,
                         ValorItemVenda = i.ValorItemVenda,
@@ -169,6 +166,40 @@ namespace IteraDisc.Api.Controllers
                 }).ToList();
 
                 return Ok(vendas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("Relatorio")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Relatorio(
+            [FromQuery] DateTime dataInicio,
+            [FromQuery] DateTime dataFim)
+        {
+            try
+            {
+                var resultado = await _dapperVendaRepositorio.RelatorioVendasPorPeriodo(dataInicio, dataFim);
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("HistoricoCompleto")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> HistoricoCompleto()
+        {
+            try
+            {
+                var resultado = await _dapperVendaRepositorio.HistoricoCompleto();
+                return Ok(resultado);
             }
             catch (Exception ex)
             {

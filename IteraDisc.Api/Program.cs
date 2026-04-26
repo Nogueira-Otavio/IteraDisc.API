@@ -32,6 +32,10 @@ builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 builder.Services.AddScoped<IITemVendaRepositorio, ItemVendaRepositorio>();
 builder.Services.AddScoped<IVendaRepositorio, VendaRepositorio>();
 
+builder.Services.AddScoped<IDapperVendaRepositorio, DapperVendaRepositorio>();
+builder.Services.AddScoped<IDapperProdutoRepositorio, DapperProdutoRepositorio>();
+builder.Services.AddScoped<IDapperUsuarioRepositorio, DapperUsuarioRepositorio>();
+
 builder.Services.AddHttpClient<IGroqService, GroqService>();
 builder.Services.AddScoped<TokenService>();
 

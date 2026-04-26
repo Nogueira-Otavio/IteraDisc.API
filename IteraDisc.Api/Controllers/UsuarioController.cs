@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using IteraDisc.Dominio.Entidades;
 using IteraDisc.Aplicacao.Interfaces;
 using IteraDisc.Api.Models.Usuarios.Requisicao;
 using IteraDisc.Api.Models.Usuarios.Resposta;
+using IteraDisc.Dominio.DTOs;
+using IteraDisc.Dominio.Entidades;
+using IteraDisc.Repositorio.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IteraDisc.Api.Controllers
 {
@@ -19,10 +15,14 @@ namespace IteraDisc.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioAplicacao _usuarioAplicacao;
+        private readonly IDapperUsuarioRepositorio _dapperUsuarioRepositorio;
 
-        public UsuarioController(IUsuarioAplicacao usuarioAplicacao)
+        public UsuarioController(
+            IUsuarioAplicacao usuarioAplicacao,
+            IDapperUsuarioRepositorio dapperUsuarioRepositorio)
         {
             _usuarioAplicacao = usuarioAplicacao;
+            _dapperUsuarioRepositorio = dapperUsuarioRepositorio;
         }
 
         [AllowAnonymous]
@@ -41,7 +41,6 @@ namespace IteraDisc.Api.Controllers
                 };
 
                 var usuarioID = await _usuarioAplicacao.Criar(usuarioDominio);
-
                 return Ok(usuarioID);
             }
             catch (Exception ex)
@@ -86,13 +85,11 @@ namespace IteraDisc.Api.Controllers
                     Email = usuarioAtualizar.Email
                 };
 
-               await _usuarioAplicacao.Atualizar(usuarioDominio);
-
+                await _usuarioAplicacao.Atualizar(usuarioDominio);
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
@@ -110,7 +107,6 @@ namespace IteraDisc.Api.Controllers
                 };
 
                 await _usuarioAplicacao.AtualizarSenha(usuarioDominio, usuario.SenhaAntiga);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -127,7 +123,6 @@ namespace IteraDisc.Api.Controllers
             try
             {
                 await _usuarioAplicacao.Deletar(usuarioId);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -144,7 +139,6 @@ namespace IteraDisc.Api.Controllers
             try
             {
                 await _usuarioAplicacao.Restaurar(usuarioId);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -170,6 +164,21 @@ namespace IteraDisc.Api.Controllers
                 }).ToList();
 
                 return Ok(usuarios);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("TotalGasto/{usuarioId}")]
+        public async Task<ActionResult> TotalGasto([FromRoute] int usuarioId)
+        {
+            try
+            {
+                var total = await _dapperUsuarioRepositorio.TotalVendasUsuario(usuarioId);
+                return Ok(total);
             }
             catch (Exception ex)
             {
