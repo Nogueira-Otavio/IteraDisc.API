@@ -32,6 +32,18 @@ Responda apenas perguntas relacionadas a:
 Fale de forma amigável, educada e como um vendedor apaixonado por música.
 Se a pergunta não tiver relação com música ou discos, responda educadamente que só pode ajudar nesses assuntos.
 Nunca saia desse papel.
+
+REGRAS DE FORMATAÇÃO — OBRIGATÓRIO SEGUIR:
+- NUNCA use tabelas Markdown (| coluna | coluna |).
+- NUNCA use o separador horizontal (---).
+- Para listas de itens, use bullet points simples com traço (-).
+- Para dados de um item, use o formato 'Campo: valor' em linhas separadas.
+- Exemplo correto:
+  - Artista: Pink Floyd
+  - Álbum: The Dark Side of the Moon
+  - Ano: 1973
+  - Por que ouvir: produção impecável e temas existenciais profundos.
+- Respostas devem ser claras, diretas e fáceis de ler em um chat.
 ";
 
         public GroqService(HttpClient httpClient, IOptions<GroqSettings> settings)
@@ -44,11 +56,11 @@ Nunca saia desse papel.
         public async Task<string> EnviarAsync(string menssagemUsuario)
         {
             var messages = new List<Message>
-            {
-                new Message { Role = "system", Content = SystemPrompt },
-                new Message { Role = "user", Content = menssagemUsuario }
-            };
-            
+    {
+        new Message { Role = "system", Content = SystemPrompt },
+        new Message { Role = "user", Content = menssagemUsuario }
+    };
+
             var request = new ChatRequest
             {
                 model = "groq/compound",
@@ -57,15 +69,30 @@ Nunca saia desse papel.
                 max_tokens = 512
             };
 
-            var response = await _httpClient.PostAsJsonAsync(Endpoint, request);
+            int tentativas = 0;
+            while (tentativas < 3)
+            {
+                try
+                {
+                    var response = await _httpClient.PostAsJsonAsync(Endpoint, request);
 
-            if (!response.IsSuccessStatusCode)
-                throw new Exception(await response.Content.ReadAsStringAsync());
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseString = await response.Content.ReadAsStringAsync();
+                        var chatResponse = JsonConvert.DeserializeObject<ChatResponse>(responseString);
+                        return chatResponse.Choices[0].Message.Content;
+                    }
+                }
+                catch
+                {
+                    tentativas++;
+                    if (tentativas < 3)
+                        await Task.Delay(1000);
+                }
+                tentativas++;
+            }
 
-            var responseString = await response.Content.ReadAsStringAsync();
-            var chatResponse = JsonConvert.DeserializeObject<ChatResponse>(responseString);
-
-            return chatResponse.Choices[0].Message.Content;
+            return "Estou com dificuldades técnicas no momento. Tente novamente em instantes! 🎵";
         }
     }
 }

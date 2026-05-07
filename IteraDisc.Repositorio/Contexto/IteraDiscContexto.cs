@@ -20,20 +20,22 @@ namespace IteraDisc.Repositorio.Contexto
 
         public IteraDiscContexto()
         {
-            
+
         }
 
         public IteraDiscContexto(DbContextOptions options) : base(options)
         {
             _options = options;
         }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            if (!optionsBuilder.IsConfigured)
+            {
                 optionsBuilder.UseSqlServer(
                     "Server=localhost\\SQLEXPRESS;Database=IteraDisc;Trusted_Connection=True;TrustServerCertificate=True"
                 );
+            }
         }
 
 

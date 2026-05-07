@@ -11,7 +11,7 @@ namespace IteraDisc.Repositorio
 
         public DapperRepositorio(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("IteraDiscConexao");
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         protected IDbConnection CriarConexao()
